@@ -46,23 +46,24 @@ if(isset($_POST['send'])){
 
 
     /*$eventDebut = date(DateTime::ATOM, mktime($hour1,$min1,0,$start[2][0], $start[1][0], $start[3][0]));
-    $eventEnd = date(DateTime::ATOM, mktime($hour2,$min2,0,$end[2][0], $end[1][0], $end[3][0]));*/
+    $eventEnd = date(DateTime::ATOM, mktime($hour2,$min2,0,$end[2][0], $end[1][0], $end[3][0]));
+    */
     $eventDebut = $start[3][0].'-'.$start[2][0].'-'.$start[1][0].'T'.sprintf("%02d",$hour1).':'.sprintf("%02d",$min1).':00+01:00';
     $eventEnd = $end[3][0].'-'.$end[2][0].'-'.$end[1][0].'T'.sprintf("%02d",$hour2).':'.sprintf("%02d",$min2).':00+01:00';
+
+
 
     $event->setSummary($summary);
     $event->setDescription($desc);
 
-
-
     $gStart = new Google_Service_Calendar_EventDateTime();
     $gStart->setDateTime($eventDebut);
-    $gStart->setTimeZone(date_default_timezone_get());
+    $gStart->setTimeZone($event->getStart()->timeZone);
     $event->setStart($gStart);
 
     $gEnd = new Google_Service_Calendar_EventDateTime();
     $gEnd->setDateTime($eventEnd);
-    $gEnd->setTimeZone(date_default_timezone_get());
+    $gEnd->setTimeZone($event->getStart()->timeZone);
     $event->setEnd($gEnd);
 
     $service->events->update($calendarId, $event->getId(), $event);
@@ -96,7 +97,7 @@ include('partial/head.html.php');
         }
         ?>
 
-        <div class="forgot-password"><a href='index.php'>Retour</a></div>
+        <div id="back"><a href="calendarList.php" class="btn-sm btn-info" role="button"><span class="glyphicon glyphicon-chevron-left"></span> Retour</a></div>
         <img id="profile-img" class="profile-img-card" src="<?php echo $userData["picture"]; ?>" width="100px" size="100px" /><br/>
         <?php if (isset($_SESSION['access_token'])) { ?>
             <div class="panel panel-default">

@@ -59,6 +59,7 @@ include('partial/head.html.php');
         <button style="opacity: 0; z-index: 10000; left: 0px; top: 0px; position: absolute; cursor: pointer; outline: 0px; width: 135px; height: 36px;">Se connecter avec Google</button>
         <a class='login' href='<?php echo $authUrl; ?>'><img class='login' src="https://developers.google.com/+/images/branding/sign-in-buttons/Red-signin_Long_base_44dp.png" width="250" /></a>
         <!-- Show User Profile otherwise-->
+
     <?php }else{
         ;                ?>
 
@@ -69,10 +70,9 @@ include('partial/head.html.php');
             <a href="calendarList.php" class="list-group-item">Lister les calendriers</a>
             <a href="calendarEventAdd.php" class="list-group-item">Ajouter un &eacute;venement</a>
         </div>
+        <div class="forgot-password"><a href="?logout" class="btn-sm btn-danger" role="button"><span class="glyphicon glyphicon glyphicon-user"></span> Logout</a></div>
     <?php }
     ?>
-
-    <div class="forgot-password"><a href='?logout'>Logout</a></div>
 </div><!-- /card-container -->
 <?php
 $javascript = '<script>

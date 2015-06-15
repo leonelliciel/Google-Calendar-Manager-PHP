@@ -42,15 +42,14 @@ if(isset($_GET['eventId'])){
 include('partial/head.html.php');
 ?>
     <div class="card">
-
-        <div class="forgot-password"><a href='index.php'>Retour</a></div>
+        <div id="back"><a href="calendarList.php" class="btn-sm btn-info" role="button"><span class="glyphicon glyphicon-chevron-left"></span> Retour</a></div>
         <?php if (isset($_SESSION['access_token'])) { ?>
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title">Evènement</h3>
                 </div>
                 <div class="panel-body">
-                    <div class="alert alert-success" role="alert">Votre événement à bien été effacé cliquez ici pour retourner à l'accueil <a href="calendarList.php">Listing des Calendriers</a> </div>
+                    <div class="alert alert-success" role="alert">Votre événement à bien été effacé cliquez sur le lien suivant pour revenir au listing des événements : <a href="calendarList.php">Listing des Calendriers</a> </div>
                 </div>
             </div>
         <?php } ?>

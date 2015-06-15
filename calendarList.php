@@ -26,7 +26,7 @@ $userData = $objOAuthService->userinfo->get();
 include('partial/head.html.php');
 ?>
 <div class="card card-container">
-    <div class="forgot-password"><a href='index.php'>Retour</a></div>
+    <div id="back"><a href="index.php" class="btn-sm btn-info" role="button"><span class="glyphicon glyphicon-chevron-left"></span> Retour</a></div>
     <img id="profile-img" class="profile-img-card" src="<?php echo $userData["picture"]; ?>" width="100px" size="100px" /><br/>
     <?php
     if (isset($_SESSION['access_token'])) {
@@ -43,6 +43,7 @@ include('partial/head.html.php');
             while(true) {
                 $i = 1;
                 foreach ($calendarList->getItems() as $calendarListEntry) {
+
                     echo '<li class="list-group-item">
                         <div class="row toggle" id="dropdown-detail-'.$i.'" data-toggle="detail-'.$i.'">
                             <div class="col-xs-10 calendar">'.$calendarListEntry->getSummary().'</div>
