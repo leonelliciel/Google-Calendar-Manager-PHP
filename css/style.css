@@ -148,3 +148,12 @@ footer {
     margin-bottom: 0;
     z-index: 100;
 }
+.calendar{
+    cursor: pointer;
+}
+.navbar-brand a{
+    color:#5FB0E4; text-decoration: none;
+}
+.list-group-item .btn-default{
+    border: 1px solid #ddd; background: #ffffff;
+}
