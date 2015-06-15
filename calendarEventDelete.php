@@ -16,8 +16,8 @@ $client->setScopes(array('https://www.googleapis.com/auth/calendar'));
 
 
 $client->setAccessToken($_SESSION['access_token']);
-if ($client->isAccessTokenExpired()) {
-    Die('Refresh Token');
+if ($client->isAccessTokenExpired()){
+    header('Location: index.php');
 }
 
 
@@ -38,7 +38,6 @@ if(isset($_GET['eventId'])){
         $error = 1;
     }
 }
-
 include('partial/head.html.php');
 ?>
     <div class="card">
@@ -49,7 +48,8 @@ include('partial/head.html.php');
                     <h3 class="panel-title">Evènement</h3>
                 </div>
                 <div class="panel-body">
-                    <div class="alert alert-success" role="alert">Votre événement à bien été effacé cliquez sur le lien suivant pour revenir au listing des événements : <a href="calendarList.php">Listing des Calendriers</a> </div>
+                    <script>window.setTimeout("location=('calendarList.php');",500);</script>
+                    <div class="alert alert-success" role="alert">Votre événement à bien été effacé, vous allez être redirigé ou cliquez sur le lien suivant pour revenir au listing des événements : <a href="calendarList.php">Listing des Calendriers</a> </div>
                 </div>
             </div>
         <?php } ?>

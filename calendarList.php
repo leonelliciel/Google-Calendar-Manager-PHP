@@ -15,7 +15,7 @@ $client->setScopes(array('https://www.googleapis.com/auth/calendar'));
 
 $client->setAccessToken($_SESSION['access_token']);
 if ($client->isAccessTokenExpired()) {
-    Die('Refresh Token');
+    header('Location: index.php');
 }
 
 
@@ -25,7 +25,7 @@ $userData = $objOAuthService->userinfo->get();
 
 include('partial/head.html.php');
 ?>
-<div class="card card-container">
+<div class="card">
     <div id="back"><a href="index.php" class="btn-sm btn-info" role="button"><span class="glyphicon glyphicon-chevron-left"></span> Retour</a></div>
     <img id="profile-img" class="profile-img-card" src="<?php echo $userData["picture"]; ?>" width="100px" size="100px" /><br/>
     <?php
@@ -45,7 +45,7 @@ include('partial/head.html.php');
                 foreach ($calendarList->getItems() as $calendarListEntry) {
 
                     echo '<li class="list-group-item">
-                        <div class="row toggle" id="dropdown-detail-'.$i.'" data-toggle="detail-'.$i.'">
+                        <div class="row toggle" id="dropdown-detail-'.$i.'" data-toggle="detail-'.$i.'" >
                             <div class="col-xs-10 calendar">'.$calendarListEntry->getSummary().'</div>
                             <div class="col-xs-2"><i class="fa fa-chevron-down pull-right"></i></div>
                         </div>

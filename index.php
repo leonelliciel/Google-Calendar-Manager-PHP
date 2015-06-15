@@ -22,7 +22,7 @@ $objOAuthService = new Google_Service_Oauth2($client);
 if (isset($_REQUEST['logout'])) {
     unset($_SESSION['access_token']);
     $client->revokeToken();
-    header('Location: ' . filter_var($redirect_uri, FILTER_SANITIZE_URL)); //redirect user back to page
+    header('Location: '.filter_var($redirect_uri, FILTER_SANITIZE_URL));
 }
 
 //Set Access Token to make Request
@@ -37,12 +37,10 @@ if ($client->getAccessToken()) {
     $authUrl = $client->createAuthUrl();
 }
 
-//Authenticate code from Google OAuth Flow
-//Add Access Token to Session
-if (isset($_GET['code'])) {
+if (isset($_GET['code'])){
     $client->authenticate($_GET['code']);
     $_SESSION['access_token'] = $client->getAccessToken();
-    header('Location: ' . filter_var($redirect_uri, FILTER_SANITIZE_URL));
+    header('Location: '.filter_var($redirect_uri, FILTER_SANITIZE_URL));
 }
 
 // Chargement du service Calendar
@@ -66,9 +64,14 @@ include('partial/head.html.php');
         <img id="profile-img" class="profile-img-card" src="<?php echo $userData["picture"]; ?>" width="100px" size="100px" /><br/>
         <p class="welcome">Bienvenue <a href="<?php echo $userData["link"]; ?>" /><?php echo $userData["name"]; ?></a>.</p>
         <p id="profile-name" class="profile-name-card"></p>
-        <div class="list-group">
-            <a href="calendarList.php" class="list-group-item">Lister les calendriers</a>
-            <a href="calendarEventAdd.php" class="list-group-item">Ajouter un &eacute;venement</a>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Actions</h3>
+            </div>
+            <div class="list-group">
+                <a href="calendarList.php" class="list-group-item">Lister les calendriers</a>
+                <a href="calendarEventAdd.php" class="list-group-item">Ajouter un &eacute;venement</a>
+            </div>
         </div>
         <div class="forgot-password"><a href="?logout" class="btn-sm btn-danger" role="button"><span class="glyphicon glyphicon glyphicon-user"></span> Logout</a></div>
     <?php }

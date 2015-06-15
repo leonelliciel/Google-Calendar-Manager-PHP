@@ -17,7 +17,7 @@ $client->setScopes(array('https://www.googleapis.com/auth/calendar'));
 
 $client->setAccessToken($_SESSION['access_token']);
 if ($client->isAccessTokenExpired()) {
-    Die('Refresh Token');
+    header('Location: index.php');
 }
 
 
@@ -51,8 +51,6 @@ if(isset($_POST['send'])){
     $eventDebut = $start[3][0].'-'.$start[2][0].'-'.$start[1][0].'T'.sprintf("%02d",$hour1).':'.sprintf("%02d",$min1).':00+01:00';
     $eventEnd = $end[3][0].'-'.$end[2][0].'-'.$end[1][0].'T'.sprintf("%02d",$hour2).':'.sprintf("%02d",$min2).':00+01:00';
 
-
-
     $event->setSummary($summary);
     $event->setDescription($desc);
 
@@ -78,8 +76,18 @@ if(isset($_POST['send'])){
 $event = new Google_Service_Calendar_Event();
 $event = $service->events->get($calendarId, $eventId);
 
-$dateStart = new DateTime($event->getStart()->dateTime,new DateTimeZone($event->getStart()->timeZone));
-$dateEnd = new DateTime($event->getEnd()->dateTime,new DateTimeZone($event->getEnd()->timeZone));
+if($event->getStart()->timeZone !=  NULL && $event->getStart()->dateTime != NULL) {
+    $dateStart = new DateTime($event->getStart()->dateTime, new DateTimeZone($event->getStart()->timeZone));
+    $dateEnd = new DateTime($event->getEnd()->dateTime, new DateTimeZone($event->getEnd()->timeZone));
+}else{
+    if($event->getStart()->date != NULL){
+        $dateStart = new DateTime($event->getStart()->date);
+        $dateEnd = new DateTime($event->getEnd()->date);
+    }else{
+        $dateStart = new DateTime($event->getStart()->dateTime);
+        $dateEnd = new DateTime($event->getEnd()->dateTime);
+    }
+}
 
 include('partial/head.html.php');
 ?>

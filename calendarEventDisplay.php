@@ -16,7 +16,7 @@ $client->setScopes(array('https://www.googleapis.com/auth/calendar'));
 
 $client->setAccessToken($_SESSION['access_token']);
 if ($client->isAccessTokenExpired()) {
-    Die('Refresh Token');
+    header('Location: index.php');
 }
 
 $service = new Google_Service_Calendar($client);
@@ -63,6 +63,9 @@ include('partial/head.html.php');
                         ?></p>
                 </div>
             </div>
+            <br/>
+            <div><a href="calendarEventDelete.php?eventId=<?php echo $eventId; ?>" class="btn-sm btn-danger pull-right" role="button"><span class="glyphicon glyphicon-chevron-info"></span> Supprimer</a></div>
+            <br/>
         <?php } ?>
 
     </div><!-- /card-container -->

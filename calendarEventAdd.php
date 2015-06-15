@@ -17,7 +17,7 @@ $client->setScopes(array('https://www.googleapis.com/auth/calendar'));
 
 $client->setAccessToken($_SESSION['access_token']);
 if ($client->isAccessTokenExpired()) {
-    Die('Refresh Token');
+    header('Location: index.php');
 }
 
 
